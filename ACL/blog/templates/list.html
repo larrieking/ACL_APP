@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+{%block title%}
+hello world
+{%endblock%}
+
+{%block cover%}
+<!-- FEATURED POST : ALWAYS LAST ADDED -->
+							<a href="blog-page-article-sidebar.html" class="d-block mb-7 position-relative text-dark clearfix text-decoration-none">
+
+								<figure class="d-block text-center overlay-dark-hover overlay-opacity-2 rounded overflow-hidden">
+									<img class="img-fluid rounded" src="{{ cover.img.url }}" alt="...">
+								</figure>
+
+								<p class="text-muted small">
+									Post Date: <time datetime="2019-12-03">Dec 03, 2019</time>
+								</p>
+								<h2 class="h4">Staff Training: 10 Expert Tips to Get New Employees Up to Speed</h2>
+
+							</a>
+							<!-- /FEATURED POST : ALWAYS LAST ADDED -->
+{%endblock%}
+
+{%block content%}
+
+{%for post in posts%}
+
+				<!-- post -->
+								<a href="{{post.get_absolute_url}}" class="col-12 col-md-6 mb-5 position-relative text-dark clearfix text-decoration-none">
+
+									<figure class="d-block text-center overlay-dark-hover overlay-opacity-2 rounded overflow-hidden">
+										<img class="img-fluid rounded" src="{{post.img.url}}" alt="...">
+									</figure>
+
+
+									<p class="text-muted small">
+										Post Date: <time datetime="2019-12-03">{{post.publish}}</time> by {{post.author}}
+									</p>
+									<h2 class="h5">{{post.title}}</h2>
+
+								</a>
+								<!-- /post -->
+{%endfor%}
+{%endblock%}
