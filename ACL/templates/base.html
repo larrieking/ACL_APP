@@ -1,5 +1,5 @@
 {% load static %}
-
+{%load blog_tags%}
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -165,7 +165,7 @@
 
 <!-- navbar : brand (logo) -->
 							<a class="navbar-brand" href="index.html">
-								<img src="assets/images/logo/logo_dark.svg" width="110" height="38" alt="...">
+								<img src="{% static 'images/logo.jpg' %}" width="110" height="38" alt="...">
 							</a>
 
 						</div>
@@ -888,33 +888,8 @@
 
 
 
-							<!-- pagination : center -->
-							<nav aria-label="pagination" class="my-5">
-								<ul class="pagination pagination-pill justify-content-center">
-
-									<li class="page-item disabled">
-										<a class="page-link" href="#" tabindex="-1">Previous</a>
-									</li>
-									
-									<li class="page-item">
-										<a class="page-link" href="#">1</a>
-									</li>
-									
-									<li class="page-item active" aria-current="page">
-										<a class="page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
-									</li>
-									
-									<li class="page-item">
-										<a class="page-link" href="#">3</a>
-									</li>
-									
-									<li class="page-item">
-										<a class="page-link" href="#">Next</a>
-									</li>
-
-								</ul>
-							</nav>
-							<!-- /pagination : center -->
+							{%block paginator%}
+							{%endblock%}
 								
 
 
@@ -982,20 +957,10 @@
 
 
 								<!-- navbar : navigation -->
-								<ul id="nav_responsive" class="nav flex-column d-none d-lg-block">
-{%for category in categories%}
-									<li class="nav-item active">
-										<a class="nav-link px-0" href="account-orders.html">
-											<i class="fi fi-arrow-end m-0 smaller"></i> 
-											<span class="px-2 d-inline-block">
-												{{category.category_name}}
-											</span>
-										</a>
-									</li>
+					{%category%}
 
-									{%endfor%}
 
-								</ul>
+
 
 							</nav>
 							<!-- /CATEGORIES -->
@@ -1025,42 +990,39 @@
 								<h3 class="h5 mt-5 mt-0-xs">
 									Top Recommended
 								</h3>
+								{%show_latest_posts 6 %}
+
+
+
+
+
+
+							</div>
+
+							<div class="sidebar_expand_mobile" class="d-none d-lg-block">
+
+								<!-- RECOMMENDED -->
+								<h3 class="h5 mt-5 mt-0-xs">
+									Most commented posts
+								</h3>
+								{% get_most_commented_posts as most_commented_posts %}
 								<ul class="list-unstyled">
+									{%for post in most_commented_posts%}
+
 
 									<li class="list-item border-bottom py-1">
-										<a class="text-dark fw-light fs-6" href="blog-page-article-sidebar.html">How Retailers Can Build</a>
-									</li>
 
-									<li class="list-item border-bottom py-1">
-										<a class="text-dark fw-light fs-6" href="blog-page-article-sidebar.html">Build an Engaged Customer Base</a>
+										<a class="text-dark fw-light fs-6" href="{{post.get_absolute_url}}">{{post.title}}</a>
 									</li>
-
-									<li class="list-item border-bottom py-1">
-										<a class="text-dark fw-light fs-6" href="blog-page-article-sidebar.html">Retail Lighting Designs to Encourage Sales</a>
-									</li>
-
-									<li class="list-item border-bottom py-1">
-										<a class="text-dark fw-light fs-6" href="blog-page-article-sidebar.html">Let there be light</a>
-									</li>
-
-									<li class="list-item border-bottom py-1">
-										<a class="text-dark fw-light fs-6" href="blog-page-article-sidebar.html">Build an Engaged Customer Base</a>
-									</li>
-
+    {%endfor%}
 								</ul>
 								<!-- /RECOMMENDED -->
 
 
 
 
-								<!-- BANNER -->
-								<a href="#" class="mt-5 d-block text-center overlay-dark-hover overlay-opacity-2 rounded overflow-hidden">
-									<img class="w-100 img-fluid rounded" src="demo.files/images/unsplash/portfolio/thumb_330/boxed-water-is-better-6RTh34xCS1M-unsplash-min.jpg" alt="...">
-								</a>
-								<h4 class="small text-gray-500 fw-normal mt-1 mb-0">
-									Sponsored Ad
-								</h4>
-								<!-- /BANNER -->
+
+
 
 							</div>
 
@@ -1109,10 +1071,10 @@
             <div class="col-12 col-lg-4 mb-4">
 
               <!-- logo -->
-              <img width="110" height="38" src="assets/images/logo/logo_light.svg" alt="...">
+              <img width="110" height="38" src="{%static 'images/logo.jpg'%}" alt="...">
 
               <div class="my-4"><!-- copyright -->
-                <p class="small mb-0">&copy; 2022 My Company Inc.</p>
+                <p class="small mb-0">&copy; 2022 Adventure Code Ltd.</p>
                 <p class="small mb-0">All rights reserved.</p>
               </div>
 
