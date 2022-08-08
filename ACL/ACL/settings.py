@@ -131,3 +131,10 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'premium141.web-hosting.com'
+EMAIL_HOST_USER = 'info@adventurecapital.com.ng'
+EMAIL_HOST_PASSWORD = 'Elshadai1986$'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
